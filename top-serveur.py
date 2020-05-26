@@ -1,7 +1,7 @@
 import requests
 import time
 import credentials
-
+import random
 
 user = credentials.user
 password = credentials.password
@@ -25,3 +25,5 @@ while True :
     print('cooldown 2h')
     #3h cool down
     time.sleep(7200)
+    #Cool down random
+    time.sleep(random.randint(0,300))

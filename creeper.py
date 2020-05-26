@@ -1,9 +1,10 @@
 import requests
 import time
 import credentials
+import random
 
-user = str(input("Quel est votre nom d'utilisateur ?: "))
-password = str(input("Quel est votre mot de passe ? : "))
+user = credentials.user
+password = credentials.password
 
 def creeper(user,password) :
     #Connecting your account to the server
@@ -24,3 +25,5 @@ while True :
     print('Cooldown 3h')
     #3h cool down
     time.sleep(10800)
+    #Cool down random
+    time.sleep(random.randint(0,300))
