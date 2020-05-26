@@ -1,13 +1,15 @@
 import requests
 import time
+import credentials
 
-user = input("Quel est votre nom d'utilisateur : ")
-passwd = input("Quel est votre mot de passe ? : ")
+
+user = credentials.user
+password = credentials.password
 
 
 def serveur_prive(user,password):
     #Connecting your account to the server
-    request = requests.post("https://www.icarya.fr/manager/auth", data={'pseudo':user,'mdp':passwd})
+    request = requests.post("https://www.icarya.fr/manager/auth", data={'pseudo':user,'mdp':password})
     ci_session = request.headers['Set-Cookie'].strip('ci_session=')
     cookies_icarya = {'ci_session' : ci_session}
 
@@ -19,13 +21,11 @@ def serveur_prive(user,password):
     print(request.text)
 
 while True :
-    serveur_prive(user,passwd)
+    serveur_prive(user,password)
     print('1h30 cooldown')
     #1h30 cool down
     time.sleep(5400)
 
-    #0 to 15 min cool down
-    time.sleep(random.randint(0,900))
 
 
 

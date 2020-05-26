@@ -1,13 +1,13 @@
 import requests
 import time
-import random
+import credentials
 
-user = str(input("Quel est votre nom d'utilisateur ?: "))
-passwd = str(input("Quel est votre mot de passe ? : "))
+user = credentials.user
+password = credentials.password
 
-def rpg_paradize_vote(user,passwd) :
+def rpg_paradize_vote(user,password) :
     #Connecting your account to the server
-    request = requests.post("https://www.icarya.fr/manager/auth", data={'pseudo':user,'mdp':passwd})
+    request = requests.post("https://www.icarya.fr/manager/auth", data={'pseudo':user,'mdp':password})
     ci_session = request.headers['Set-Cookie'].strip('ci_session=')
     cookies_icarya = {'ci_session' : ci_session}
 
@@ -18,7 +18,7 @@ def rpg_paradize_vote(user,passwd) :
     #Sending a request to rpg paradize in order to get the SERVERID104284 && PHPSESSID
     request = requests.get("http://www.rpg-paradize.com/?page=vote&vote=43891")
 
-    #Getting the SERVERID104284
+    #Getting the SERVERID104    284
     SERVERID104284 = request.headers['Set-Cookie'].split(";")[0].split("=")[1]
 
     #Getting the PHPSESSID
@@ -39,12 +39,10 @@ def rpg_paradize_vote(user,passwd) :
     print(request.text)
 
 while True :
-    rpg_paradize_vote(user,passwd)
+    rpg_paradize_vote(user,password)
     print('cooldown 3h')
     #3h cool down
     time.sleep(10800)
-    #0 to 15 min cool down
-    time.sleep(random.randint(0,900))
     
 
 

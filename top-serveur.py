@@ -1,13 +1,14 @@
 import requests
 import time
+import credentials
 
 
-user = str(input("Quel est votre nom d'utilisateur ?: "))
-passwd = str(input("Quel est votre mot de passe ? : "))
+user = credentials.user
+password = credentials.password
 
-def top_serveur(user,passwd) :
+def top_serveur(user,password) :
     #Connecting your account to the server
-    request = requests.post("https://www.icarya.fr/manager/auth", data={'pseudo':user,'mdp':passwd})
+    request = requests.post("https://www.icarya.fr/manager/auth", data={'pseudo':user,'mdp':password})
     ci_session = request.headers['Set-Cookie'].strip('ci_session=')
     cookies_icarya = {'ci_session' : ci_session}
 
@@ -20,10 +21,7 @@ def top_serveur(user,passwd) :
     print(request.text)
 
 while True :
-    top_serveur(user,passwd)
+    top_serveur(user,password)
     print('cooldown 2h')
     #3h cool down
     time.sleep(7200)
-
-    #0 to 15 min cool down
-    time.sleep(random.randint(0,900))
