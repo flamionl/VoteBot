@@ -28,5 +28,3 @@ while True :
     print('24h cooldown')
     #24 cool down
     time.sleep(86400)
-    #Cool down random
-    time.sleep(random.randint(0,300))
